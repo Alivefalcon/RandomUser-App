@@ -1,4 +1,4 @@
-package uk.ac.tees.w9637327.meetup.ui.theme
+package tees.ac.uk.w9637327.randomuserapp.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

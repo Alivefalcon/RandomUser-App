@@ -1,4 +1,4 @@
-package uk.ac.tees.w9637327.meetup
+package tees.ac.uk.w9637327.randomuserapp
 
 import org.junit.Test
 

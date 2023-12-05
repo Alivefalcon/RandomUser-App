@@ -1,4 +1,4 @@
-package uk.ac.tees.w9637327.meetup.ui.theme
+package tees.ac.uk.w9637327.randomuserapp.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MeetUpTheme(
+fun RandomUserAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

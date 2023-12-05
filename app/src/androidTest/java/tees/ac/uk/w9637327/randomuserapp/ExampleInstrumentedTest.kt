@@ -1,4 +1,4 @@
-package uk.ac.tees.w9637327.meetup
+package tees.ac.uk.w9637327.randomuserapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("uk.ac.tees.w9637327.meetup", appContext.packageName)
+        assertEquals("tees.ac.uk.w9637327.randomuserapp", appContext.packageName)
     }
 }
