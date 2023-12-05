@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77283939232",
+    "project_id": "randomuserapp-42e29",
+    "storage_bucket": "randomuserapp-42e29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77283939232:android:24fd0d4f72cc351bb28ac5",
+        "android_client_info": {
+          "package_name": "tees.ac.uk.w9637327.randomuserapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXzU0iAKJduKGyd63p3Ir4T3JSGMRI_5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
