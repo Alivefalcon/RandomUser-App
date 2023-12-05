@@ -76,8 +76,8 @@ class AuthenticationViewModel : ViewModel() {
             var password = _uiState.value.password.toString();
             LoginFirebase(email, password) { isSuccess ->
                 if (isSuccess) {
-                    // navigate to home screen
                 }
+                updateState(false)
                 statusFail = true;
             }
         } else if (_uiState.value.authenticationMode == AuthenticationMode.SIGN_UP) {
@@ -85,13 +85,13 @@ class AuthenticationViewModel : ViewModel() {
             var password = _uiState.value.password.toString();
             CreateUserInFirebase(email, password) { isSuccess ->
                 if (isSuccess) {
-                    // navigate to home screen
+
                 }
+                updateState(false)
                 statusFail = true;
             }
         }
-
-        if (statusFail == true) {
+        if (statusFail) {
             viewModelScope.launch(Dispatchers.IO) {
                 delay(3000L)
                 _uiState.update {
@@ -104,6 +104,13 @@ class AuthenticationViewModel : ViewModel() {
         }
     }
 
+    private fun updateState(status:Boolean){
+        _uiState.update {
+            it.copy(
+                isLoading = false
+            )
+        }
+    }
     private fun dismissError() {
         _uiState.update {
             it.copy(
