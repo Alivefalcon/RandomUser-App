@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Email
@@ -28,6 +30,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -35,6 +38,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -92,44 +97,6 @@ fun AuthenticationButton(
 }
 
 
-
-@Composable
-fun AuthenticationContent(
-    modifier: Modifier = Modifier,
-    authenticationState: AuthenticationState,
-    handleEvent: (event: AuthenticationEvent) -> Unit
-) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        if (authenticationState.isLoading) {
-            CircularProgressIndicator()
-        } else {
-            AuthenticationForm(
-                authenticationMode = authenticationState.authenticationMode,
-                email = authenticationState.email,
-                password = authenticationState.password,
-                onEmailChanged = {
-                    handleEvent(AuthenticationEvent.EmailChanged(it))
-                },
-                onPasswordChanged = {
-                    handleEvent(
-                        AuthenticationEvent.PasswordChanged(
-                            it
-                        )
-                    )
-                },
-                onToggleAthMode = { handleEvent(AuthenticationEvent.ToggleAuthenticationMode) },
-                passwordSatisfiedRequirement = authenticationState.passwordRequirements,
-                onAuthenticate = { handleEvent(AuthenticationEvent.Authenticate) },
-                enableAuthentication = authenticationState.isFormValid()
-            )
-            authenticationState.error?.let {
-                AuthenticationErrorDialog(error = it) {
-                    handleEvent(AuthenticationEvent.ErrorDismissed)
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun AuthenticationErrorDialog(
@@ -368,4 +335,39 @@ fun ToggleAuthenticationMode(
             )
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Toolbar(backClicked: () -> Unit, logoutClicked: () -> Unit) {
+
+    TopAppBar(
+        title = {
+            Text(
+                text = "Random User App", color = Color.Black
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = {
+                backClicked()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.Black
+                )
+            }
+
+        },
+        actions = {
+            IconButton(onClick = {
+                logoutClicked()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ExitToApp,
+                    contentDescription = "Logout",
+                )
+            }
+        }
+    )
 }

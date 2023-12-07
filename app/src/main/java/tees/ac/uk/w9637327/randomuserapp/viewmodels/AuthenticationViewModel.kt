@@ -15,6 +15,8 @@ import tees.ac.uk.w9637327.randomuserapp.enums.PasswordRequirement
 import tees.ac.uk.w9637327.randomuserapp.firebase.CreateUserInFirebase
 import tees.ac.uk.w9637327.randomuserapp.firebase.LoginFirebase
 import tees.ac.uk.w9637327.randomuserapp.firebase.RandomUserFirebase
+import tees.ac.uk.w9637327.randomuserapp.navigations.AppRouter
+import tees.ac.uk.w9637327.randomuserapp.navigations.RandomUserAppNavigation
 import tees.ac.uk.w9637327.randomuserapp.state.authenticationstate.AuthenticationEvent
 import tees.ac.uk.w9637327.randomuserapp.state.authenticationstate.AuthenticationState
 
@@ -75,19 +77,20 @@ class AuthenticationViewModel : ViewModel() {
             var email = _uiState.value.email.toString()
             var password = _uiState.value.password.toString();
             LoginFirebase(email, password) { isSuccess ->
-                if (isSuccess) {
-                }
                 updateState(false)
+                if (isSuccess) {
+                    AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)
+                }
                 statusFail = true;
             }
         } else if (_uiState.value.authenticationMode == AuthenticationMode.SIGN_UP) {
             var email = _uiState.value.email.toString()
             var password = _uiState.value.password.toString();
             CreateUserInFirebase(email, password) { isSuccess ->
-                if (isSuccess) {
-
-                }
                 updateState(false)
+                if (isSuccess) {
+                    AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)
+                }
                 statusFail = true;
             }
         }
