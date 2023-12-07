@@ -23,7 +23,6 @@ import androidx.compose.ui.text.input.KeyboardType.Companion.Text
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import tees.ac.uk.w9637327.randomuserapp.common.Toolbar
 import tees.ac.uk.w9637327.randomuserapp.model.User
 import tees.ac.uk.w9637327.randomuserapp.navigations.AppRouter
 import tees.ac.uk.w9637327.randomuserapp.navigations.RandomUserAppNavigation

@@ -76,32 +76,40 @@ class AuthenticationViewModel : ViewModel() {
         if (_uiState.value.authenticationMode == AuthenticationMode.SIGN_IN) {
             var email = _uiState.value.email.toString()
             var password = _uiState.value.password.toString();
+            updateState(false)
             LoginFirebase(email, password) { isSuccess ->
-                updateState(false)
                 if (isSuccess) {
                     AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)
+                } else {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        delay(1)
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = "Invalid Credentials!, Try Again"
+                            )
+                        }
+                    }
                 }
-                statusFail = true;
             }
         } else if (_uiState.value.authenticationMode == AuthenticationMode.SIGN_UP) {
             var email = _uiState.value.email.toString()
             var password = _uiState.value.password.toString();
+            updateState(false)
             CreateUserInFirebase(email, password) { isSuccess ->
-                updateState(false)
                 if (isSuccess) {
                     AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)
                 }
-                statusFail = true;
-            }
-        }
-        if (statusFail) {
-            viewModelScope.launch(Dispatchers.IO) {
-                delay(3000L)
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        error = "Some thing went wrong!"
-                    )
+                else {
+                    viewModelScope.launch(Dispatchers.IO) {
+                        delay(1)
+                        _uiState.update {
+                            it.copy(
+                                isLoading = false,
+                                error = "Some thing went wrong!, Try again"
+                            )
+                        }
+                    }
                 }
             }
         }

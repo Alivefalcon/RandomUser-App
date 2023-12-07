@@ -11,7 +11,7 @@ sealed class RandomUserAppNavigation{
 
 object AppRouter {
 
-    var currentScreen: MutableState<RandomUserAppNavigation> = mutableStateOf(RandomUserAppNavigation.MainScreen)
+    var currentScreen: MutableState<RandomUserAppNavigation> = mutableStateOf(RandomUserAppNavigation.AuthenticationScreen)
 
     fun navigateTo(destination : RandomUserAppNavigation){
         currentScreen.value = destination
