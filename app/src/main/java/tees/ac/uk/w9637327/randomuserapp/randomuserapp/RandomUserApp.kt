@@ -15,6 +15,7 @@ import tees.ac.uk.w9637327.randomuserapp.navigations.AppRouter
 import tees.ac.uk.w9637327.randomuserapp.navigations.RandomUserAppNavigation
 import tees.ac.uk.w9637327.randomuserapp.screens.Authenticationscreen
 import tees.ac.uk.w9637327.randomuserapp.screens.MainScreen
+import tees.ac.uk.w9637327.randomuserapp.screens.RandomUserDetailsScreen
 import tees.ac.uk.w9637327.randomuserapp.viewmodels.AuthenticationViewModel
 import tees.ac.uk.w9637327.randomuserapp.viewmodels.UserViewModel
 
@@ -41,6 +42,10 @@ fun RandomUserApp()
                 is RandomUserAppNavigation.MainScreen -> {
                     val viewModel: UserViewModel = viewModel()
                     MainScreen(viewModel)
+                }
+                is RandomUserAppNavigation.RandomUserDetailsScreen -> {
+                    val viewModel: UserViewModel = viewModel()
+                    RandomUserDetailsScreen(viewModel)
                 }
             }
         }

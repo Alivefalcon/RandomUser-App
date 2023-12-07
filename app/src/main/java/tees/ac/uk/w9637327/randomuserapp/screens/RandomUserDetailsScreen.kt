@@ -30,26 +30,23 @@ import tees.ac.uk.w9637327.randomuserapp.navigations.RandomUserAppNavigation
 import tees.ac.uk.w9637327.randomuserapp.viewmodels.UserViewModel
 
 @Composable
-fun RandomUserDetailsScreen(viewModel: UserViewModel, context: Context
-) {
+fun RandomUserDetailsScreen(viewModel: UserViewModel) {
     Column {
         Toolbar(
             isBackClickEnable = true,
             backClicked = {AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)},
             logoutClicked = { AppRouter.navigateTo(RandomUserAppNavigation.AuthenticationScreen) })
         // LazyColumn below the Toolbar
-        CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         viewModel.user?.let {
             UserDetailsScreen(
-                user = it,
-                context = context
+                user = it
             )
         }
     }
 }
 
 @Composable
-fun UserDetailsScreen(user: User, context: Context) {
+fun UserDetailsScreen(user: User) {
     Box(
         modifier = Modifier
             .padding(8.dp, 4.dp, 8.dp, 4.dp)
