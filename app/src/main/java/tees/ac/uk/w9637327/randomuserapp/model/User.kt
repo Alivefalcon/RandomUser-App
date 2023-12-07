@@ -13,6 +13,10 @@ class Name {
     var title: String? = null
     var first: String? = null
     var last: String? = null
+
+    override fun toString(): String {
+        return "${this?.title + " " + (this?.first) + " " + (this?.last)}"
+    }
 }
 
 class Location {
@@ -21,6 +25,10 @@ class Location {
     var state: String? = null
     var country: String? = null
     var postcode: String? = null
+
+    override fun toString(): String {
+        return return "${this?.street?.number.toString() + " " + this?.street?.name + " " + (this?.city) + " " + (this?.state) + " " + (this?.country)}"
+    }
 }
 
 class Picture {

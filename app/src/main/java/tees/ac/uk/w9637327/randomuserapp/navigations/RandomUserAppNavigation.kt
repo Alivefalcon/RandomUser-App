@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 sealed class RandomUserAppNavigation{
     object AuthenticationScreen : RandomUserAppNavigation()
     object MainScreen : RandomUserAppNavigation()
+    object  RandomUserDetailsScreen : RandomUserAppNavigation()
 }
 
 object AppRouter {

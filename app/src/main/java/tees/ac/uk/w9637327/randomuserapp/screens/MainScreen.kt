@@ -29,22 +29,23 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import tees.ac.uk.w9637327.randomuserapp.common.Toolbar
 import tees.ac.uk.w9637327.randomuserapp.model.User
+import tees.ac.uk.w9637327.randomuserapp.navigations.AppRouter
+import tees.ac.uk.w9637327.randomuserapp.navigations.RandomUserAppNavigation
 import tees.ac.uk.w9637327.randomuserapp.viewmodels.UserViewModel
 
 @Composable
 fun MainScreen(viewModel: UserViewModel) {
     Column {
         // Toolbar at the top
-        Toolbar(backClicked = {}, logoutClicked = {})
+        Toolbar(isBackClickEnable = false,backClicked = {}, logoutClicked = {AppRouter.navigateTo(RandomUserAppNavigation.AuthenticationScreen)})
         // LazyColumn below the Toolbar
         if (viewModel.isLoading.value) {
-            // Data is loading, show CircularProgressIndicator
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-        }else {
+        } else {
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(viewModel._userData.value) { user ->
+                items(viewModel._userDataList.value) { user ->
                     UserRow(
                         user = user,
                         viewModel = viewModel
@@ -64,8 +65,8 @@ fun UserRow(user: User, viewModel: UserViewModel) {
             .fillMaxWidth()
             .clickable(indication = rememberRipple(bounded = true),
                 interactionSource = remember { MutableInteractionSource() }) {
-                //viewModel.addUser(user)
-                // tonavigate to
+                viewModel.addUser(user)
+                AppRouter.navigateTo(RandomUserAppNavigation.RandomUserDetailsScreen)
             },
         shape = RoundedCornerShape(CornerSize(5.dp))
     ) {
@@ -91,7 +92,7 @@ fun UserRow(user: User, viewModel: UserViewModel) {
             ) {
                 Text(
                     modifier = Modifier.padding(5.dp),
-                    text = "user.name.getUsername()",
+                    text = user.name.toString(),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.titleSmall

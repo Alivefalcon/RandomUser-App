@@ -339,7 +339,7 @@ fun ToggleAuthenticationMode(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Toolbar(backClicked: () -> Unit, logoutClicked: () -> Unit) {
+fun Toolbar(isBackClickEnable : Boolean,backClicked: () -> Unit, logoutClicked: () -> Unit) {
 
     TopAppBar(
         title = {
@@ -348,16 +348,15 @@ fun Toolbar(backClicked: () -> Unit, logoutClicked: () -> Unit) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = {
-                backClicked()
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.Black
-                )
+            if(isBackClickEnable){
+                IconButton(onClick = backClicked) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.Black
+                    )
+                }
             }
-
         },
         actions = {
             IconButton(onClick = {
