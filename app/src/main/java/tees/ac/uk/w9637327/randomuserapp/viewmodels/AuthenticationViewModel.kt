@@ -79,8 +79,11 @@ class AuthenticationViewModel : ViewModel() {
             updateState(false)
             LoginFirebase(email, password) { isSuccess ->
                 if (isSuccess) {
+                    updateLogOut(true)
                     AppRouter.navigateTo(RandomUserAppNavigation.MainScreen)
-                } else {
+
+                } else if(!_uiState.value.islogout) {
+
                     viewModelScope.launch(Dispatchers.IO) {
                         delay(1)
                         _uiState.update {
@@ -122,6 +125,14 @@ class AuthenticationViewModel : ViewModel() {
             )
         }
     }
+    private fun updateLogOut(status:Boolean){
+        _uiState.update {
+            it.copy(
+                islogout = status
+            )
+        }
+    }
+
     private fun dismissError() {
         _uiState.update {
             it.copy(
