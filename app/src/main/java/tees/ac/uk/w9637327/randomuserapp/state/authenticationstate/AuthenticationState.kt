@@ -7,6 +7,7 @@ data class AuthenticationState(
     val email: String? = null,
     val password: String? = null,
     val isLoading: Boolean = false,
+    var islogout: Boolean = false,
     val error: String? = null,
     val passwordRequirements: List<PasswordRequirement> = emptyList(),
     val authenticationMode: AuthenticationMode = AuthenticationMode.SIGN_IN
